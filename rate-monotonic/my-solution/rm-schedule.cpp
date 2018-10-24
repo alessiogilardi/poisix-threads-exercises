@@ -16,9 +16,9 @@ void task1_code();
 void task2_code();
 void task3_code();
 
-void *task1(void *);
-void *task2(void *);
-void *task3(void *);
+void *task1(void *ptr);
+void *task2(void *ptr);
+void *task3(void *ptr);
 
 #define NTASKS 3
 
