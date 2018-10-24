@@ -1,4 +1,4 @@
-// Three periodsc threads with rate monotonic, two aperiodsc threads 
+// Three periodsc threads with rate monotonic, two aperiodsc threads
 /***********************************************
  * compile with g++ -lpthread RMaperiodsci.cpo
 ************************************************/
@@ -19,7 +19,7 @@ void task3_code( );
 void task4_code( );
 void task5_code( );
 
-// thread functions 
+// thread functions
 void *task1( void *);
 void *task2( void *);
 void *task3( void *);
@@ -46,13 +46,13 @@ pthread_t thread_id[NTASKS];
 
 main()
 {
-  periods[0]= 100000000; 
-  periods[1]= 200000000; 
+  periods[0]= 100000000;
+  periods[1]= 200000000;
   periods[2]= 400000000;
 
   //for aperiodic tasks we set the period equals to 0
-  periods[3]= 0; 
-  periods[4]= 0; 
+  periods[3]= 0;
+  periods[4]= 0;
 
   sched_param priomax;
   priomax.sched_priority=sched_get_priority_max(SCHED_FIFO);
@@ -113,7 +113,7 @@ main()
     {
       pthread_attr_init(&(attributes[i]));
       pthread_attr_setinheritsched(&(attributes[i]), PTHREAD_EXPLICIT_SCHED);
-      
+
       pthread_attr_setschedpolicy(&(attributes[i]), SCHED_FIFO);
 
       parameters[i].sched_priority = priomax.sched_priority - i;
@@ -158,13 +158,13 @@ main()
   pthread_join( thread_id[1], NULL);
   pthread_join( thread_id[2], NULL);
 
-  
+
   exit(0);
 }
 
 void task1_code()
 {
-  
+
   // the task does something...
 
   double uno;
@@ -173,7 +173,7 @@ void task1_code()
       for (int j = 0; j < 1000; j++)
 	uno = rand()*rand()%10;
     }
- 
+
   printf("1");
 
   // when the random variable uno=0, then aperiodic task 4 must
@@ -197,7 +197,7 @@ void task1_code()
       pthread_cond_signal(&cond_task_5);
       pthread_mutex_unlock(&mutex_task_5);
     }
-  
+
   fflush(stdout);
 }
 
@@ -233,6 +233,7 @@ void *task1( void *)
 	periods_micro%1000000;
     }
 }
+
 void task2_code()
 {
   for (int i = 0; i < 10; i++)
@@ -275,7 +276,7 @@ void task3_code()
 {
   for (int i = 0; i < 10; i++)
     {
-      for (int j = 0; j < 1000; j++);		
+      for (int j = 0; j < 1000; j++);
       double uno = rand()*rand();
     }
   printf("3");
@@ -336,9 +337,9 @@ void task5_code()
 {
   for (int i = 0; i < 10; i++)
     {
-      for (int j = 0; j < 1000; j++)	
+      for (int j = 0; j < 1000; j++)
 	double uno = rand()*rand();
-    }	
+    }
   printf(" -aperiodsco 5- ");
   fflush(stdout);
 }
@@ -353,4 +354,3 @@ void *task5( void *)
       task5_code();
     }
 }
-
