@@ -16,9 +16,9 @@ void task1_code();
 void task2_code();
 void task3_code();
 
-void *task1(void *ptr);
-void *task2(void *ptr);
-void *task3(void *ptr);
+void *task1(void *);
+void *task2(void *);
+void *task3(void *);
 
 #define NTASKS 3
 
@@ -31,6 +31,12 @@ struct sched_param parameters[NTASKS]; // Parametri per la schedulazione
 int missed_deadlines[NTASKS]; // Array per tenere traccia di quante volte un task manca la deadline
 
 int main() {
+
+  if (getuid() != 0) {
+    printf("Devi essere root\n");
+    exit(-1);
+  }
+
   periods[0] = 100000000; //in nanosecondi
   periods[1] = 200000000; //in nanosecondi
   periods[2] = 400000000; //in nanosecondi
@@ -81,7 +87,7 @@ int main() {
       printf("\n U=%lf Ulub=%lf Non schedulable Task Set\n", U, Ulub);
       return(-1);
   }
-  printf("\n U=%lf Ulub=%lf Scheduable Task Set\n", U, Ulub);
+  printf("\n U=%lf Ulub=%lf Scheduable Task Set\n\n", U, Ulub);
   fflush(stdout);
   sleep(5);
 
