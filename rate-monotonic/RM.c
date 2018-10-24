@@ -31,7 +31,7 @@ pthread_t thread_id[NTASKS];
 struct sched_param parameters[NTASKS];
 int missed_deadlines[NTASKS];
 
-main()
+int main()
 {
   // set task periods in nanoseconds
 
@@ -162,7 +162,7 @@ void *task1( void *ptr)
   waittime.tv_sec=0; /* seconds */
   waittime.tv_nsec = periods[0]; /* nanoseconds */
 
-   
+
 
    /* Codice per macchine multi core da eseguire in ogni thread */
    /*
